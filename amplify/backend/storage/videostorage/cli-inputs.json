@@ -1,0 +1,14 @@
+{
+  "resourceName": "videostorage",
+  "policyUUID": "b471b674",
+  "bucketName": "capstone-vid-store",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "S3Triggerb6eefe11",
+  "groupAccess": {}
+}
