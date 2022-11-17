@@ -52,7 +52,10 @@ const App = ({ signOut }) => {
       description: form.get("description"),
       image: image.name,
     };
-    if (!!data.image) await Storage.put(data.name, image);
+    if (!!data.image) await Storage.put(data.name, image, {
+      contentType: "video/mp4",
+    });
+
     await API.graphql({
       query: createNoteMutation,
       variables: { input: data },
@@ -96,6 +99,9 @@ const App = ({ signOut }) => {
             name="image"
             as="input"
             type="file"
+
+            accept="video/*"
+
             style={{ alignSelf: "end" }}
           />
           <Button type="submit" variation="primary">
