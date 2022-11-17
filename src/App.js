@@ -44,6 +44,9 @@ const App = ({ signOut }) => {
     event.preventDefault();
     const form = new FormData(event.target);
     const image = form.get("image");
+    if (image == null) {
+      console.log("no image found");
+    }
     const data = {
       name: form.get("name"),
       description: form.get("description"),
@@ -89,6 +92,12 @@ const App = ({ signOut }) => {
             variation="quiet"
             required
           />
+          <View
+            name="image"
+            as="input"
+            type="file"
+            style={{ alignSelf: "end" }}
+          />
           <Button type="submit" variation="primary">
             Create Note
           </Button>
@@ -120,14 +129,6 @@ const App = ({ signOut }) => {
         </Flex>
       ))}
       </View>
-
-      <View
-        name="image"
-        as="input"
-        type="file"
-        style={{ alignSelf: "end" }}
-      />
-
       <Button onClick={signOut}>Sign Out</Button>
     </View>
   );
