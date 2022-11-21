@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
 import { API, Storage } from 'aws-amplify';
+
+import Auth from '@aws-amplify/auth';
+
 import {
   Button,
   Flex,
@@ -40,6 +43,13 @@ const App = ({ signOut }) => {
     setNotes(notesFromAPI);
   }
 
+  let user_email = "test@amazon.com";
+  Auth.currentAuthenticatedUser().then((user) => {
+    console.log('user email = ' + user.attributes.email);
+    user_email=user.attributes.email;
+    console.log(`email=${user_email}`);
+  });
+
   async function createNote(event) {
     event.preventDefault();
     const form = new FormData(event.target);
@@ -54,6 +64,7 @@ const App = ({ signOut }) => {
     };
     if (!!data.image) await Storage.put(data.name, image, {
       contentType: "video/mp4",
+      tagging: `email=${user_email}`
     });
 
     await API.graphql({
